@@ -1,0 +1,15 @@
+{
+  "name": "driveplay",
+  "version": "1.0.0",
+  "description": "Multiplayer mini-game platform for drivers and passengers",
+  "scripts": {
+    "dev:frontend": "cd frontend/driveplay-frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build:frontend": "cd frontend/driveplay-frontend && npm run build",
+    "start:backend": "cd backend && npm start"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

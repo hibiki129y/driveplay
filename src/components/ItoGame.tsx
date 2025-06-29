@@ -22,21 +22,9 @@ export default function ItoGame() {
         currentPhase: 'theme-input',
         currentPlayerIndex: 0,
         sortedCards: [],
-        timeRemaining: 60,
-        isTimerActive: false,
       });
     }
   }, [itoData, setGameData]);
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (itoData?.isTimerActive && itoData.timeRemaining > 0) {
-      interval = setInterval(() => {
-        updateGameData({ timeRemaining: itoData.timeRemaining - 1 });
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [itoData?.isTimerActive, itoData?.timeRemaining, updateGameData]);
 
   const startGame = () => {
     if (!theme.trim()) return;
@@ -71,8 +59,6 @@ export default function ItoGame() {
       updateGameData({
         currentPhase: 'word-input',
         currentPlayerIndex: 0,
-        timeRemaining: 60,
-        isTimerActive: true,
       });
       setShowPrivacyScreen(true);
     }
@@ -91,7 +77,6 @@ export default function ItoGame() {
       updateGameData({
         playerWords: newPlayerWords,
         currentPlayerIndex: itoData.currentPlayerIndex + 1,
-        timeRemaining: 60,
       });
       setCurrentWord('');
       setShowPrivacyScreen(true);
@@ -105,7 +90,6 @@ export default function ItoGame() {
         playerWords: newPlayerWords,
         currentPhase: 'sorting',
         sortedCards: cards,
-        isTimerActive: false,
       });
       setCurrentWord('');
     }
@@ -127,25 +111,6 @@ export default function ItoGame() {
     updateGameData({ currentPhase: 'results' });
   };
 
-  const calculateAccuracy = () => {
-    if (!itoData) return 0;
-    
-    const actualOrder = itoData.sortedCards.map(card => 
-      itoData.playerNumbers[card.playerId]
-    );
-    
-    const correctOrder = [...actualOrder].sort((a, b) => a - b);
-    
-    let correctPositions = 0;
-    for (let i = 0; i < actualOrder.length; i++) {
-      if (actualOrder[i] === correctOrder[i]) {
-        correctPositions++;
-      }
-    }
-    
-    return Math.round((correctPositions / actualOrder.length) * 100);
-  };
-
   const resetGame = () => {
     setGameData({
       theme: '',
@@ -154,8 +119,6 @@ export default function ItoGame() {
       currentPhase: 'theme-input',
       currentPlayerIndex: 0,
       sortedCards: [],
-      timeRemaining: 60,
-      isTimerActive: false,
     });
     setTheme('');
     setCurrentWord('');
@@ -165,51 +128,51 @@ export default function ItoGame() {
   if (!itoData) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-white">Loading game...</div>
+        <div className="text-gray-600">ゲームを読み込み中...</div>
       </div>
     );
   }
 
   if (itoData.currentPhase === 'theme-input') {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gray-900">
+      <div className="min-h-screen flex flex-col items-center justify-center p-6">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-white mb-2">🔢 Ito Game</h1>
-            <p className="text-gray-300">Enter a theme for the game</p>
+            <h1 className="game-title mb-4">🔢 イトゲーム</h1>
+            <p className="text-gray-600 text-lg">テーマを入力してください</p>
           </div>
 
           <div className="card mb-6">
-            <label className="block text-white text-lg font-semibold mb-4">
-              Theme (e.g., &quot;Things that are hot&quot;, &quot;Scary things&quot;)
+            <label className="block text-gray-700 text-lg font-semibold mb-4">
+              テーマ（例：「熱いもの」「怖いもの」）
             </label>
             <input
               type="text"
               value={theme}
               onChange={(e) => setTheme(e.target.value)}
-              placeholder="Enter your theme..."
+              placeholder="テーマを入力してください..."
               className="input-field mb-4"
               onKeyPress={(e) => e.key === 'Enter' && startGame()}
             />
             <button
               onClick={startGame}
               disabled={!theme.trim()}
-              className={`w-full py-4 px-8 rounded-lg text-lg font-bold transition-colors ${
+              className={`w-full py-4 px-8 rounded-2xl text-lg font-bold transition-all duration-300 shadow-lg ${
                 theme.trim()
-                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                  : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                  ? 'bg-gradient-to-r from-pink-400 to-purple-500 hover:from-pink-500 hover:to-purple-600 text-white hover:shadow-xl transform hover:scale-105'
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
               }`}
             >
-              Start Game
+              🎮 ゲーム開始
             </button>
           </div>
 
           <div className="text-center">
             <button
               onClick={() => setCurrentGame(null)}
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-gray-500 hover:text-gray-700 transition-colors font-medium"
             >
-              ← Back to Menu
+              ← メニューに戻る
             </button>
           </div>
         </div>
@@ -223,21 +186,22 @@ export default function ItoGame() {
 
     if (showPrivacyScreen) {
       return (
-        <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gray-900">
+        <div className="min-h-screen flex flex-col items-center justify-center p-6">
           <div className="w-full max-w-md text-center">
             <div className="card mb-6">
-              <h2 className="text-2xl font-bold text-white mb-4">Pass to Next Player</h2>
-              <p className="text-gray-300 mb-4">
-                Hand the device to{' '}
-                <span className="font-semibold text-white">
+              <h2 className="text-2xl font-bold text-gray-700 mb-4">📱 次のプレイヤーに渡してください</h2>
+              <p className="text-gray-600 mb-4">
+                デバイスを{' '}
+                <span className="font-semibold text-pink-600">
                   {currentPlayer.nickname || currentPlayer.name}
                 </span>
+                {' '}さんに渡してください
               </p>
               <button
                 onClick={() => setShowPrivacyScreen(false)}
                 className="btn-primary"
               >
-                I&apos;m Ready
+                ✅ 準備完了
               </button>
             </div>
           </div>
@@ -246,27 +210,27 @@ export default function ItoGame() {
     }
 
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gray-900">
+      <div className="min-h-screen flex flex-col items-center justify-center p-6">
         <div className="w-full max-w-md text-center">
           <div className="card mb-6">
-            <h2 className="text-xl font-bold text-white mb-2">
-              {currentPlayer.nickname || currentPlayer.name}
+            <h2 className="text-xl font-bold text-gray-700 mb-2">
+              {currentPlayer.nickname || currentPlayer.name}さん
             </h2>
-            <p className="text-gray-300 mb-6">Your secret number is:</p>
-            <div className="text-6xl font-bold text-blue-400 mb-6">
+            <p className="text-gray-600 mb-6">あなたの秘密の数字は：</p>
+            <div className="text-6xl font-bold text-pink-500 mb-6">
               {playerNumber}
             </div>
-            <p className="text-gray-300 mb-6">
-              Theme: <span className="font-semibold text-white">{itoData.theme}</span>
+            <p className="text-gray-600 mb-6">
+              テーマ: <span className="font-semibold text-purple-600">{itoData.theme}</span>
             </p>
-            <p className="text-sm text-gray-400 mb-6">
-              Remember this number! You&apos;ll need to think of something that matches this magnitude.
+            <p className="text-sm text-gray-500 mb-6">
+              この数字を覚えて、数字の大きさに合うものを考えてください！
             </p>
             <button
               onClick={showNextPlayerNumber}
               className="btn-primary"
             >
-              {itoData.currentPlayerIndex < players.length - 1 ? 'Next Player' : 'Start Word Input'}
+              {itoData.currentPlayerIndex < players.length - 1 ? '👥 次のプレイヤー' : '✏️ 単語入力開始'}
             </button>
           </div>
         </div>
@@ -279,21 +243,22 @@ export default function ItoGame() {
 
     if (showPrivacyScreen) {
       return (
-        <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gray-900">
+        <div className="min-h-screen flex flex-col items-center justify-center p-6">
           <div className="w-full max-w-md text-center">
             <div className="card mb-6">
-              <h2 className="text-2xl font-bold text-white mb-4">Pass to Next Player</h2>
-              <p className="text-gray-300 mb-4">
-                Hand the device to{' '}
-                <span className="font-semibold text-white">
+              <h2 className="text-2xl font-bold text-gray-700 mb-4">📱 次のプレイヤーに渡してください</h2>
+              <p className="text-gray-600 mb-4">
+                デバイスを{' '}
+                <span className="font-semibold text-pink-600">
                   {currentPlayer.nickname || currentPlayer.name}
                 </span>
+                {' '}さんに渡してください
               </p>
               <button
                 onClick={() => setShowPrivacyScreen(false)}
                 className="btn-primary"
               >
-                I&apos;m Ready
+                ✅ 準備完了
               </button>
             </div>
           </div>
@@ -302,47 +267,48 @@ export default function ItoGame() {
     }
 
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gray-900">
+      <div className="min-h-screen flex flex-col items-center justify-center p-6">
         <div className="w-full max-w-md">
           <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-white mb-2">
-              {currentPlayer.nickname || currentPlayer.name}
+            <h2 className="text-2xl font-bold text-gray-700 mb-2">
+              {currentPlayer.nickname || currentPlayer.name}さん
             </h2>
-            <p className="text-gray-300 mb-4">
-              Theme: <span className="font-semibold text-white">{itoData.theme}</span>
+            <p className="text-gray-600 mb-4">
+              テーマ: <span className="font-semibold text-purple-600">{itoData.theme}</span>
             </p>
-            <div className="text-3xl font-bold text-red-400">
-              {Math.floor(itoData.timeRemaining / 60)}:{(itoData.timeRemaining % 60).toString().padStart(2, '0')}
-            </div>
           </div>
 
           <div className="card mb-6">
-            <label className="block text-white text-lg font-semibold mb-4">
-              Enter your word/phrase:
+            <label className="block text-gray-700 text-lg font-semibold mb-4">
+              あなたの数字に合う単語・フレーズを入力：
             </label>
             <input
               type="text"
               value={currentWord}
               onChange={(e) => setCurrentWord(e.target.value)}
-              placeholder="Something that matches your number..."
+              placeholder="数字の大きさに合うものを入力..."
               className="input-field mb-4"
               onKeyPress={(e) => e.key === 'Enter' && submitWord()}
             />
             <button
               onClick={submitWord}
-              disabled={!currentWord.trim() || itoData.timeRemaining === 0}
-              className={`w-full py-4 px-8 rounded-lg text-lg font-bold transition-colors ${
-                currentWord.trim() && itoData.timeRemaining > 0
-                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                  : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+              disabled={!currentWord.trim()}
+              className={`w-full py-4 px-8 rounded-2xl text-lg font-bold transition-all duration-300 shadow-lg ${
+                currentWord.trim()
+                  ? 'bg-gradient-to-r from-pink-400 to-purple-500 hover:from-pink-500 hover:to-purple-600 text-white hover:shadow-xl transform hover:scale-105'
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
               }`}
             >
-              Submit Word
+              ✅ 単語を決定
             </button>
           </div>
 
-          <div className="text-center text-sm text-gray-400">
-            Player {itoData.currentPlayerIndex + 1} of {players.length}
+          <div className="text-center">
+            <div className="bg-white/60 rounded-2xl p-3 shadow-md inline-block">
+              <p className="text-sm text-gray-600">
+                プレイヤー {itoData.currentPlayerIndex + 1} / {players.length}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -351,16 +317,18 @@ export default function ItoGame() {
 
   if (itoData.currentPhase === 'sorting') {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gray-900">
+      <div className="min-h-screen flex flex-col items-center justify-center p-6">
         <div className="w-full max-w-md">
           <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-white mb-2">Sort the Cards</h2>
-            <p className="text-gray-300 mb-4">
-              Arrange from smallest to largest number
+            <h2 className="text-2xl font-bold text-gray-700 mb-2">🔄 カードを並べ替え</h2>
+            <p className="text-gray-600 mb-4">
+              小さい数字から大きい数字の順に並べてください
             </p>
-            <p className="text-sm text-gray-400">
-              Theme: {itoData.theme}
-            </p>
+            <div className="bg-white/60 rounded-2xl p-3 shadow-md inline-block">
+              <p className="text-sm text-gray-600">
+                テーマ: {itoData.theme}
+              </p>
+            </div>
           </div>
 
           <div className="space-y-3 mb-6">
@@ -369,20 +337,20 @@ export default function ItoGame() {
               return (
                 <div
                   key={card.playerId}
-                  className="card bg-gray-700 hover:bg-gray-600 transition-colors cursor-move"
+                  className="card hover:shadow-xl transition-all duration-200 cursor-move"
                 >
                   <div className="flex justify-between items-center">
                     <div>
-                      <div className="font-semibold text-white">
+                      <div className="font-semibold text-gray-700">
                         {player?.nickname || player?.name}
                       </div>
-                      <div className="text-gray-300">{card.word}</div>
+                      <div className="text-gray-600">{card.word}</div>
                     </div>
                     <div className="flex flex-col gap-1">
                       {index > 0 && (
                         <button
                           onClick={() => moveCard(index, index - 1)}
-                          className="text-blue-400 hover:text-blue-300 text-sm"
+                          className="text-pink-500 hover:text-pink-600 text-lg font-bold"
                         >
                           ↑
                         </button>
@@ -390,7 +358,7 @@ export default function ItoGame() {
                       {index < itoData.sortedCards.length - 1 && (
                         <button
                           onClick={() => moveCard(index, index + 1)}
-                          className="text-blue-400 hover:text-blue-300 text-sm"
+                          className="text-pink-500 hover:text-pink-600 text-lg font-bold"
                         >
                           ↓
                         </button>
@@ -406,7 +374,7 @@ export default function ItoGame() {
             onClick={revealResults}
             className="btn-primary w-full"
           >
-            Reveal Numbers
+            🎯 答え合わせ
           </button>
         </div>
       </div>
@@ -414,20 +382,12 @@ export default function ItoGame() {
   }
 
   if (itoData.currentPhase === 'results') {
-    const accuracy = calculateAccuracy();
-    const isSuccess = accuracy >= 80;
-
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gray-900">
+      <div className="min-h-screen flex flex-col items-center justify-center p-6">
         <div className="w-full max-w-md">
           <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-white mb-4">Results</h2>
-            <div className={`text-4xl font-bold mb-4 ${isSuccess ? 'text-green-400' : 'text-red-400'}`}>
-              {accuracy}%
-            </div>
-            {isSuccess && (
-              <div className="text-2xl mb-4">🎉 Great job! 🎉</div>
-            )}
+            <h2 className="text-2xl font-bold text-gray-700 mb-4">🎯 結果発表</h2>
+            <p className="text-gray-600 mb-4">みんなの数字を見てみましょう！</p>
           </div>
 
           <div className="space-y-3 mb-6">
@@ -438,12 +398,12 @@ export default function ItoGame() {
                 <div key={card.playerId} className="card">
                   <div className="flex justify-between items-center">
                     <div>
-                      <div className="font-semibold text-white">
+                      <div className="font-semibold text-gray-700">
                         {player?.nickname || player?.name}
                       </div>
-                      <div className="text-gray-300">{card.word}</div>
+                      <div className="text-gray-600">{card.word}</div>
                     </div>
-                    <div className="text-2xl font-bold text-blue-400">
+                    <div className="text-3xl font-bold text-pink-500">
                       {actualNumber}
                     </div>
                   </div>
@@ -457,13 +417,13 @@ export default function ItoGame() {
               onClick={resetGame}
               className="btn-primary w-full"
             >
-              Play Again
+              🔄 もう一度プレイ
             </button>
             <button
               onClick={() => setCurrentGame(null)}
               className="btn-secondary w-full"
             >
-              Back to Menu
+              ← メニューに戻る
             </button>
           </div>
         </div>

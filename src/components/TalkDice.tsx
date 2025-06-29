@@ -74,21 +74,21 @@ export default function TalkDice() {
   if (!talkDiceData) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-white">Loading topics...</div>
+        <div className="text-gray-600">トピックを読み込み中...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gray-900">
+    <div className="min-h-screen flex flex-col items-center justify-center p-6">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">🎲 Talk Dice</h1>
-          <p className="text-gray-300">Conversation starter</p>
+          <h1 className="game-title mb-4">🎲 トークダイス</h1>
+          <p className="text-gray-600 text-lg">会話のきっかけを作ろう</p>
         </div>
 
         <div className="card mb-6 text-center">
-          <div className="text-lg text-white leading-relaxed min-h-[100px] flex items-center justify-center">
+          <div className="text-lg text-gray-800 leading-relaxed min-h-[100px] flex items-center justify-center font-medium">
             {talkDiceData.currentTopic}
           </div>
         </div>
@@ -98,7 +98,7 @@ export default function TalkDice() {
             onClick={handleNextTopic}
             className="btn-primary w-full"
           >
-            Next Topic
+            🔄 次のトピック
           </button>
 
           {!showCustomInput ? (
@@ -106,24 +106,24 @@ export default function TalkDice() {
               onClick={() => setShowCustomInput(true)}
               className="btn-secondary w-full"
             >
-              Add Custom Topic
+              ➕ オリジナルトピック追加
             </button>
           ) : (
-            <div className="space-y-2">
+            <div className="space-y-3">
               <input
                 type="text"
-                placeholder="Enter your custom topic..."
+                placeholder="オリジナルトピックを入力してください..."
                 value={customTopic}
                 onChange={(e) => setCustomTopic(e.target.value)}
                 className="input-field"
                 onKeyPress={(e) => e.key === 'Enter' && handleAddCustomTopic()}
               />
-              <div className="flex gap-2">
+              <div className="flex gap-3">
                 <button
                   onClick={handleAddCustomTopic}
                   className="btn-primary flex-1"
                 >
-                  Add
+                  ✅ 追加
                 </button>
                 <button
                   onClick={() => {
@@ -132,7 +132,7 @@ export default function TalkDice() {
                   }}
                   className="btn-secondary flex-1"
                 >
-                  Cancel
+                  ❌ キャンセル
                 </button>
               </div>
             </div>
@@ -142,14 +142,18 @@ export default function TalkDice() {
         <div className="text-center">
           <button
             onClick={() => setCurrentGame(null)}
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-gray-500 hover:text-gray-700 transition-colors font-medium"
           >
-            ← Back to Menu
+            ← メニューに戻る
           </button>
         </div>
 
-        <div className="text-center mt-4 text-sm text-gray-500">
-          Topics used: {talkDiceData.usedTopics.length}
+        <div className="text-center mt-4">
+          <div className="bg-white/60 rounded-2xl p-3 shadow-md inline-block">
+            <p className="text-sm text-gray-600">
+              使用済みトピック: {talkDiceData.usedTopics.length}
+            </p>
+          </div>
         </div>
       </div>
     </div>

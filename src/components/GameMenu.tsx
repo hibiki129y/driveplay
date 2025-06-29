@@ -7,17 +7,19 @@ export default function GameMenu() {
   const { gameState, setCurrentGame, resetGame } = useGameStore();
   const { players } = gameState;
 
-  const playerDisplay = players.map(p => p.nickname || p.name).join(', ');
+  const playerDisplay = players.map(p => p.nickname || p.name).join('、');
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gray-900">
+    <div className="min-h-screen flex flex-col items-center justify-center p-6">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">DrivePlay</h1>
-          <p className="text-gray-300 mb-4">Choose a game to play</p>
-          <p className="text-sm text-gray-400">
-            Players: {playerDisplay}
-          </p>
+          <h1 className="game-title mb-4">🚗 ドライブプレイ</h1>
+          <p className="text-gray-600 text-lg mb-4">ゲームを選んでください</p>
+          <div className="bg-white/60 rounded-2xl p-3 shadow-md">
+            <p className="text-sm text-gray-600">
+              👥 参加者: {playerDisplay}
+            </p>
+          </div>
         </div>
 
         <div className="space-y-4 mb-8">
@@ -25,9 +27,9 @@ export default function GameMenu() {
             onClick={() => setCurrentGame('talk-dice')}
             className="btn-primary w-full"
           >
-            🎲 Talk Dice
-            <span className="block text-sm font-normal mt-1 opacity-80">
-              Random conversation starters
+            🎲 トークダイス
+            <span className="block text-sm font-normal mt-1 opacity-90">
+              会話のきっかけを作ろう
             </span>
           </button>
 
@@ -35,9 +37,9 @@ export default function GameMenu() {
             onClick={() => setCurrentGame('ito')}
             className="btn-primary w-full"
           >
-            🔢 Ito Game
-            <span className="block text-sm font-normal mt-1 opacity-80">
-              Guess the order of secret numbers
+            🔢 イトゲーム
+            <span className="block text-sm font-normal mt-1 opacity-90">
+              秘密の数字の順番を当てよう
             </span>
           </button>
         </div>
@@ -46,7 +48,7 @@ export default function GameMenu() {
           onClick={resetGame}
           className="btn-secondary w-full"
         >
-          Change Players
+          👥 プレイヤー変更
         </button>
       </div>
     </div>

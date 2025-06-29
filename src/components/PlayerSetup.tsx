@@ -24,31 +24,31 @@ export default function PlayerSetup() {
   const handleStartGame = () => {
     const players: Player[] = Array(playerCount).fill(null).map((_, i) => ({
       id: `player-${i + 1}`,
-      name: `Player ${i + 1}`,
+      name: `プレイヤー${i + 1}`,
       nickname: playerNames[i] || undefined,
     }));
     setPlayers(players);
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gray-900">
+    <div className="min-h-screen flex flex-col items-center justify-center p-6">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">DrivePlay</h1>
-          <p className="text-gray-300">Road trip games for 2-6 players</p>
+          <h1 className="game-title mb-4">🚗 ドライブプレイ</h1>
+          <p className="text-gray-600 text-lg">2〜6人で楽しむドライブゲーム</p>
         </div>
 
         <div className="card mb-6">
-          <h2 className="text-xl font-semibold mb-4">Player Count</h2>
-          <div className="grid grid-cols-5 gap-2">
+          <h2 className="text-xl font-semibold mb-4 text-gray-700">👥 プレイヤー人数</h2>
+          <div className="grid grid-cols-5 gap-3">
             {[2, 3, 4, 5, 6].map((count) => (
               <button
                 key={count}
                 onClick={() => handlePlayerCountChange(count)}
-                className={`py-3 px-4 rounded-lg font-semibold transition-colors ${
+                className={`py-3 px-4 rounded-2xl font-bold text-lg transition-all duration-200 shadow-md ${
                   playerCount === count
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    ? 'bg-gradient-to-r from-pink-400 to-purple-500 text-white shadow-lg transform scale-105'
+                    : 'bg-white/70 text-gray-600 hover:bg-white hover:shadow-lg hover:scale-105'
                 }`}
               >
                 {count}
@@ -58,13 +58,13 @@ export default function PlayerSetup() {
         </div>
 
         <div className="card mb-6">
-          <h2 className="text-xl font-semibold mb-4">Player Names (Optional)</h2>
+          <h2 className="text-xl font-semibold mb-4 text-gray-700">✏️ ニックネーム（任意）</h2>
           <div className="space-y-3">
             {Array(playerCount).fill(null).map((_, i) => (
               <input
                 key={i}
                 type="text"
-                placeholder={`Player ${i + 1} nickname`}
+                placeholder={`プレイヤー${i + 1}のニックネーム`}
                 value={playerNames[i] || ''}
                 onChange={(e) => handleNameChange(i, e.target.value)}
                 className="input-field"
@@ -75,9 +75,9 @@ export default function PlayerSetup() {
 
         <button
           onClick={handleStartGame}
-          className="btn-primary w-full"
+          className="btn-primary w-full text-xl"
         >
-          Start Playing
+          🎮 ゲームスタート！
         </button>
       </div>
     </div>

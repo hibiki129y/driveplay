@@ -23,8 +23,6 @@ export interface ItoGameState {
   currentPhase: 'theme-input' | 'number-reveal' | 'word-input' | 'sorting' | 'results';
   currentPlayerIndex: number;
   sortedCards: Array<{ playerId: string; word: string }>;
-  timeRemaining: number;
-  isTimerActive: boolean;
 }
 
 export interface GameStore {

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { GameStore, GameState, Player, TalkDiceState, ItoGameState } from '@/types/game';
+import { GameStore, GameState, Player, TalkDiceState, ItoGameState, InsiderGameState } from '@/types/game';
 
 const initialState: GameState = {
   players: [],
@@ -18,7 +18,7 @@ export const useGameStore = create<GameStore>()(
           gameState: { ...state.gameState, players },
         })),
       
-      setCurrentGame: (currentGame: 'setup' | 'talk-dice' | 'ito' | null) =>
+      setCurrentGame: (currentGame: 'setup' | 'talk-dice' | 'ito' | 'insider' | null) =>
         set((state) => ({
           gameState: { 
             ...state.gameState, 
@@ -27,17 +27,17 @@ export const useGameStore = create<GameStore>()(
           },
         })),
       
-      setGameData: (gameData: TalkDiceState | ItoGameState | null) =>
+      setGameData: (gameData: TalkDiceState | ItoGameState | InsiderGameState | null) =>
         set((state) => ({
           gameState: { ...state.gameState, gameData },
         })),
       
-      updateGameData: (updates: Partial<TalkDiceState | ItoGameState>) =>
+      updateGameData: (updates: Partial<TalkDiceState | ItoGameState | InsiderGameState>) =>
         set((state) => ({
           gameState: {
             ...state.gameState,
             gameData: state.gameState.gameData
-              ? { ...state.gameState.gameData, ...updates }
+              ? { ...state.gameState.gameData, ...updates } as TalkDiceState | ItoGameState | InsiderGameState
               : null,
           },
         })),

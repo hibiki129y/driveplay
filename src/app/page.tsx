@@ -5,6 +5,7 @@ import PlayerSetup from '@/components/PlayerSetup';
 import GameMenu from '@/components/GameMenu';
 import TalkDice from '@/components/TalkDice';
 import ItoGame from '@/components/ItoGame';
+import InsiderGame from '@/components/InsiderGame';
 
 export default function Home() {
   const { gameState } = useGameStore();
@@ -24,6 +25,10 @@ export default function Home() {
 
   if (currentGame === 'ito') {
     return <ItoGame />;
+  }
+
+  if (currentGame === 'insider') {
+    return <InsiderGame />;
   }
 
   return <GameMenu />;

@@ -42,6 +42,16 @@ export default function GameMenu() {
               秘密の数字の順番を当てよう
             </span>
           </button>
+
+          <button
+            onClick={() => setCurrentGame('insider')}
+            className="btn-primary w-full"
+          >
+            🕵️ インサイダーゲーム
+            <span className="block text-sm font-normal mt-1 opacity-90">
+              内通者を見つけ出そう
+            </span>
+          </button>
         </div>
 
         <button

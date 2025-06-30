@@ -49,13 +49,22 @@ export default function InsiderGame() {
         updateGameData({ timeRemaining: insiderData.timeRemaining - 1 });
       }, 1000);
     } else if (insiderData?.isTimerActive && insiderData.timeRemaining <= 0) {
-      updateGameData({ 
-        isTimerActive: false,
-        currentPhase: 'reasoning-phase'
-      });
+      if (insiderData.currentPhase === 'question-phase') {
+        updateGameData({ 
+          isTimerActive: true,
+          currentPhase: 'reasoning-phase',
+          timeRemaining: Math.max(insiderData.timeRemaining, 60)
+        });
+      } else if (insiderData.currentPhase === 'reasoning-phase') {
+        updateGameData({ 
+          isTimerActive: false,
+          currentPhase: 'accusation-phase',
+          votes: {}
+        });
+      }
     }
     return () => clearInterval(interval);
-  }, [insiderData?.isTimerActive, insiderData?.timeRemaining, updateGameData]);
+  }, [insiderData?.isTimerActive, insiderData?.timeRemaining, insiderData?.currentPhase, updateGameData]);
 
   const getRandomWord = useCallback((): string => {
     if (words.length === 0) return 'りんご';
@@ -101,16 +110,18 @@ export default function InsiderGame() {
   };
 
   const startReasoningPhase = () => {
+    const reasoningTime = Math.max(insiderData?.timeRemaining || 60, 60);
     updateGameData({
       currentPhase: 'reasoning-phase',
-      isTimerActive: false,
-      timeRemaining: 120,
+      isTimerActive: true,
+      timeRemaining: reasoningTime,
     });
   };
 
   const startAccusationPhase = () => {
     updateGameData({
       currentPhase: 'accusation-phase',
+      isTimerActive: false,
       votes: {},
     });
   };
@@ -351,22 +362,39 @@ export default function InsiderGame() {
   }
 
   if (insiderData.currentPhase === 'reasoning-phase') {
+    const minutes = Math.floor(insiderData.timeRemaining / 60);
+    const seconds = insiderData.timeRemaining % 60;
+    const progressPercentage = insiderData.timeRemaining <= 0 ? 100 : 
+      ((300 - insiderData.timeRemaining) / 300) * 100;
+
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-6">
         <div className="w-full max-w-md">
-          <div className="text-center mb-8">
+          <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-700 mb-4">🤔 推理フェーズ</h2>
             <p className="text-gray-600 mb-4">誰がインサイダーか話し合ってください</p>
           </div>
 
           <div className="card mb-6">
+            <div className="text-center mb-4">
+              <div className="text-3xl font-bold text-red-500 mb-2">
+                {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-3">
+                <div 
+                  className="bg-gradient-to-r from-red-400 to-red-600 h-3 rounded-full transition-all duration-1000"
+                  style={{ width: `${Math.min(progressPercentage, 100)}%` }}
+                ></div>
+              </div>
+            </div>
+
             <div className="bg-yellow-100 border border-yellow-300 rounded-2xl p-4 mb-4">
               <p className="text-gray-700 font-semibold mb-2">お題：</p>
               <p className="text-2xl font-bold text-purple-600">{insiderData.currentWord}</p>
             </div>
             
             <p className="text-gray-600 text-center mb-6">
-              この時間を使って、誰がインサイダーかを話し合ってください。
+              残り時間でインサイダーを見つけ出してください！
             </p>
             
             <button
@@ -375,6 +403,10 @@ export default function InsiderGame() {
             >
               🗳️ 告発フェーズへ
             </button>
+            
+            <p className="text-sm text-gray-600 text-center mt-3">
+              時間切れになると自動的に告発フェーズに移ります
+            </p>
           </div>
 
           <div className="text-center">

@@ -1,11 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useGameStore } from '@/store/gameStore';
+import RecommendModal from './RecommendModal';
 
 export default function GameMenu() {
   const { gameState, setCurrentGame, resetGame } = useGameStore();
   const { players } = gameState;
+  const [showRecommendModal, setShowRecommendModal] = useState(false);
 
   const playerDisplay = players.map(p => p.nickname || p.name).join('、');
 
@@ -23,6 +25,16 @@ export default function GameMenu() {
         </div>
 
         <div className="space-y-4 mb-8">
+          <button
+            onClick={() => setShowRecommendModal(true)}
+            className="btn-secondary w-full"
+          >
+            🎲 おすすめ
+            <span className="block text-sm font-normal mt-1 opacity-90">
+              あなたにぴったりのゲームを見つけよう
+            </span>
+          </button>
+
           <button
             onClick={() => setCurrentGame('talk-dice')}
             className="btn-primary w-full"
@@ -61,6 +73,11 @@ export default function GameMenu() {
           👥 プレイヤー変更
         </button>
       </div>
+
+      <RecommendModal 
+        isOpen={showRecommendModal} 
+        onClose={() => setShowRecommendModal(false)} 
+      />
     </div>
   );
 }

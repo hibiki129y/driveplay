@@ -37,6 +37,29 @@ export interface InsiderGameState {
   gameResult: 'citizens-win' | 'insider-wins' | null;
 }
 
+export interface Room {
+  id: string;
+  name: string;
+  created_at: string;
+  game_state: GameState;
+}
+
+export interface RoomParticipant {
+  id: string;
+  room_id: string;
+  user_id: string;
+  joined_at: string;
+}
+
+export interface RoomStore {
+  currentRoom: Room | null;
+  isHost: boolean;
+  participants: RoomParticipant[];
+  setCurrentRoom: (room: Room | null) => void;
+  setIsHost: (isHost: boolean) => void;
+  setParticipants: (participants: RoomParticipant[]) => void;
+}
+
 export interface GameStore {
   gameState: GameState;
   setPlayers: (players: Player[]) => void;

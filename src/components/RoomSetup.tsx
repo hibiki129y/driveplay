@@ -1,18 +1,21 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import { useRoom } from '@/hooks/useRoom';
 
-export default function RoomSetup() {
+interface RoomSetupProps {
+  onRoomCreated: (roomId: string) => void;
+  onRoomJoined: (roomId: string) => void;
+}
+
+export default function RoomSetup({ onRoomCreated, onRoomJoined }: RoomSetupProps) {
   const [mode, setMode] = useState<'create' | 'join' | null>(null);
   const [roomName, setRoomName] = useState('');
   const [roomCode, setRoomCode] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
-  const router = useRouter();
   const { user, signInAnonymously } = useAuth();
   const { createRoom, joinRoom } = useRoom(null);
 
@@ -28,7 +31,7 @@ export default function RoomSetup() {
       }
       
       const roomId = await createRoom(roomName.trim());
-      router.push(`/game/${roomId}`);
+      onRoomCreated(roomId);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to create room');
     } finally {
@@ -48,7 +51,7 @@ export default function RoomSetup() {
       }
       
       await joinRoom(roomCode.trim());
-      router.push(`/game/${roomCode.trim()}`);
+      onRoomJoined(roomCode.trim());
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to join room');
     } finally {
@@ -89,7 +92,7 @@ export default function RoomSetup() {
 
           <div className="text-center mt-6">
             <button
-              onClick={() => router.push('/')}
+              onClick={() => window.location.href = '/'}
               className="text-gray-500 hover:text-gray-700 transition-colors font-medium"
             >
               ← シングルプレイヤーモードに戻る

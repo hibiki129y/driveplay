@@ -1,0 +1,254 @@
+{
+  "topics": [
+    {
+      "id": 1,
+      "text": "もし宝くじで1億円当たったら何をする？",
+      "category": "hypothetical"
+    },
+    {
+      "id": 2,
+      "text": "子供の頃の一番の思い出は？",
+      "category": "memories"
+    },
+    {
+      "id": 3,
+      "text": "無人島に一つだけ持っていけるとしたら何を選ぶ？",
+      "category": "hypothetical"
+    },
+    {
+      "id": 4,
+      "text": "今まで食べた中で一番美味しかった料理は？",
+      "category": "food"
+    },
+    {
+      "id": 5,
+      "text": "もし時間を止められるとしたら何をしたい？",
+      "category": "superpowers"
+    },
+    {
+      "id": 6,
+      "text": "人生で一番恥ずかしかった出来事は？",
+      "category": "embarrassing"
+    },
+    {
+      "id": 7,
+      "text": "もし動物と話せるとしたら、どの動物と話したい？",
+      "category": "superpowers"
+    },
+    {
+      "id": 8,
+      "text": "今まで見た映画で一番感動したのは？",
+      "category": "entertainment"
+    },
+    {
+      "id": 9,
+      "text": "もし透明人間になれるとしたら何をする？",
+      "category": "superpowers"
+    },
+    {
+      "id": 10,
+      "text": "子供の頃になりたかった職業は？",
+      "category": "childhood"
+    },
+    {
+      "id": 11,
+      "text": "もし過去に戻れるとしたら、いつに戻りたい？",
+      "category": "time-travel"
+    },
+    {
+      "id": 12,
+      "text": "今まで行った中で一番印象的だった場所は？",
+      "category": "travel"
+    },
+    {
+      "id": 13,
+      "text": "もし世界中どこでも住めるとしたら、どこに住みたい？",
+      "category": "travel"
+    },
+    {
+      "id": 14,
+      "text": "人生で一番怖かった体験は？",
+      "category": "scary"
+    },
+    {
+      "id": 15,
+      "text": "もし一日だけ他の人になれるとしたら、誰になりたい？",
+      "category": "hypothetical"
+    },
+    {
+      "id": 16,
+      "text": "今まで読んだ本で一番面白かったのは？",
+      "category": "books"
+    },
+    {
+      "id": 17,
+      "text": "もし空を飛べるとしたら、どこに行きたい？",
+      "category": "superpowers"
+    },
+    {
+      "id": 18,
+      "text": "人生で一番嬉しかった瞬間は？",
+      "category": "happiness"
+    },
+    {
+      "id": 19,
+      "text": "もし魔法が使えるとしたら、どんな魔法を使いたい？",
+      "category": "magic"
+    },
+    {
+      "id": 20,
+      "text": "今まで会った人で一番印象的だった人は？",
+      "category": "people"
+    },
+    {
+      "id": 21,
+      "text": "If you could have dinner with anyone, dead or alive, who would it be?",
+      "category": "hypothetical"
+    },
+    {
+      "id": 22,
+      "text": "What's your biggest fear?",
+      "category": "fears"
+    },
+    {
+      "id": 23,
+      "text": "If you could learn any skill instantly, what would it be?",
+      "category": "skills"
+    },
+    {
+      "id": 24,
+      "text": "What's the best advice you've ever received?",
+      "category": "wisdom"
+    },
+    {
+      "id": 25,
+      "text": "If you could change one thing about the world, what would it be?",
+      "category": "world"
+    },
+    {
+      "id": 26,
+      "text": "What's your favorite childhood memory?",
+      "category": "childhood"
+    },
+    {
+      "id": 27,
+      "text": "If you could live in any time period, when would it be?",
+      "category": "time-travel"
+    },
+    {
+      "id": 28,
+      "text": "What's something you've always wanted to try but haven't yet?",
+      "category": "bucket-list"
+    },
+    {
+      "id": 29,
+      "text": "If you could have any superpower, what would it be?",
+      "category": "superpowers"
+    },
+    {
+      "id": 30,
+      "text": "What's the most beautiful place you've ever seen?",
+      "category": "travel"
+    },
+    {
+      "id": 31,
+      "text": "好きな季節とその理由は？",
+      "category": "seasons"
+    },
+    {
+      "id": 32,
+      "text": "もし一つだけ願いが叶うとしたら何を願う？",
+      "category": "wishes"
+    },
+    {
+      "id": 33,
+      "text": "今まで受けた中で一番嬉しいプレゼントは？",
+      "category": "gifts"
+    },
+    {
+      "id": 34,
+      "text": "もし宇宙人に会ったら何を聞きたい？",
+      "category": "aliens"
+    },
+    {
+      "id": 35,
+      "text": "人生で一番大切にしているものは？",
+      "category": "values"
+    },
+    {
+      "id": 36,
+      "text": "もし明日世界が終わるとしたら何をする？",
+      "category": "apocalypse"
+    },
+    {
+      "id": 37,
+      "text": "今まで笑った中で一番面白かった出来事は？",
+      "category": "funny"
+    },
+    {
+      "id": 38,
+      "text": "もし記憶を一つだけ消せるとしたら何を消す？",
+      "category": "memory"
+    },
+    {
+      "id": 39,
+      "text": "理想の休日の過ごし方は？",
+      "category": "relaxation"
+    },
+    {
+      "id": 40,
+      "text": "もし不老不死になれるとしたら、なりたい？",
+      "category": "immortality"
+    },
+    {
+      "id": 41,
+      "text": "What's your biggest accomplishment?",
+      "category": "achievements"
+    },
+    {
+      "id": 42,
+      "text": "If you could speak any language fluently, which would you choose?",
+      "category": "languages"
+    },
+    {
+      "id": 43,
+      "text": "What's the worst job you can imagine having?",
+      "category": "work"
+    },
+    {
+      "id": 44,
+      "text": "If you could be famous for something, what would it be?",
+      "category": "fame"
+    },
+    {
+      "id": 45,
+      "text": "What's your favorite way to waste time?",
+      "category": "leisure"
+    },
+    {
+      "id": 46,
+      "text": "If you could only eat one food for the rest of your life, what would it be?",
+      "category": "food"
+    },
+    {
+      "id": 47,
+      "text": "What's the strangest dream you've ever had?",
+      "category": "dreams"
+    },
+    {
+      "id": 48,
+      "text": "If you could invent something, what would it be?",
+      "category": "inventions"
+    },
+    {
+      "id": 49,
+      "text": "What's your favorite sound?",
+      "category": "senses"
+    },
+    {
+      "id": 50,
+      "text": "If you could eliminate one thing from daily life, what would it be?",
+      "category": "annoyances"
+    }
+  ]
+}

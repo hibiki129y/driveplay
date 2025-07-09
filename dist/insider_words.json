@@ -1,0 +1,254 @@
+{
+  "words": [
+    {
+      "id": 1,
+      "text": "りんご",
+      "category": "食べ物"
+    },
+    {
+      "id": 2,
+      "text": "犬",
+      "category": "動物"
+    },
+    {
+      "id": 3,
+      "text": "車",
+      "category": "乗り物"
+    },
+    {
+      "id": 4,
+      "text": "本",
+      "category": "物"
+    },
+    {
+      "id": 5,
+      "text": "海",
+      "category": "場所"
+    },
+    {
+      "id": 6,
+      "text": "赤",
+      "category": "色"
+    },
+    {
+      "id": 7,
+      "text": "春",
+      "category": "季節"
+    },
+    {
+      "id": 8,
+      "text": "音楽",
+      "category": "趣味"
+    },
+    {
+      "id": 9,
+      "text": "学校",
+      "category": "場所"
+    },
+    {
+      "id": 10,
+      "text": "猫",
+      "category": "動物"
+    },
+    {
+      "id": 11,
+      "text": "パン",
+      "category": "食べ物"
+    },
+    {
+      "id": 12,
+      "text": "電車",
+      "category": "乗り物"
+    },
+    {
+      "id": 13,
+      "text": "青",
+      "category": "色"
+    },
+    {
+      "id": 14,
+      "text": "夏",
+      "category": "季節"
+    },
+    {
+      "id": 15,
+      "text": "映画",
+      "category": "趣味"
+    },
+    {
+      "id": 16,
+      "text": "公園",
+      "category": "場所"
+    },
+    {
+      "id": 17,
+      "text": "鳥",
+      "category": "動物"
+    },
+    {
+      "id": 18,
+      "text": "ケーキ",
+      "category": "食べ物"
+    },
+    {
+      "id": 19,
+      "text": "自転車",
+      "category": "乗り物"
+    },
+    {
+      "id": 20,
+      "text": "緑",
+      "category": "色"
+    },
+    {
+      "id": 21,
+      "text": "秋",
+      "category": "季節"
+    },
+    {
+      "id": 22,
+      "text": "読書",
+      "category": "趣味"
+    },
+    {
+      "id": 23,
+      "text": "病院",
+      "category": "場所"
+    },
+    {
+      "id": 24,
+      "text": "魚",
+      "category": "動物"
+    },
+    {
+      "id": 25,
+      "text": "ラーメン",
+      "category": "食べ物"
+    },
+    {
+      "id": 26,
+      "text": "飛行機",
+      "category": "乗り物"
+    },
+    {
+      "id": 27,
+      "text": "黄色",
+      "category": "色"
+    },
+    {
+      "id": 28,
+      "text": "冬",
+      "category": "季節"
+    },
+    {
+      "id": 29,
+      "text": "料理",
+      "category": "趣味"
+    },
+    {
+      "id": 30,
+      "text": "図書館",
+      "category": "場所"
+    },
+    {
+      "id": 31,
+      "text": "うさぎ",
+      "category": "動物"
+    },
+    {
+      "id": 32,
+      "text": "寿司",
+      "category": "食べ物"
+    },
+    {
+      "id": 33,
+      "text": "船",
+      "category": "乗り物"
+    },
+    {
+      "id": 34,
+      "text": "紫",
+      "category": "色"
+    },
+    {
+      "id": 35,
+      "text": "スポーツ",
+      "category": "趣味"
+    },
+    {
+      "id": 36,
+      "text": "駅",
+      "category": "場所"
+    },
+    {
+      "id": 37,
+      "text": "象",
+      "category": "動物"
+    },
+    {
+      "id": 38,
+      "text": "カレー",
+      "category": "食べ物"
+    },
+    {
+      "id": 39,
+      "text": "バス",
+      "category": "乗り物"
+    },
+    {
+      "id": 40,
+      "text": "オレンジ",
+      "category": "色"
+    },
+    {
+      "id": 41,
+      "text": "ゲーム",
+      "category": "趣味"
+    },
+    {
+      "id": 42,
+      "text": "レストラン",
+      "category": "場所"
+    },
+    {
+      "id": 43,
+      "text": "ライオン",
+      "category": "動物"
+    },
+    {
+      "id": 44,
+      "text": "ピザ",
+      "category": "食べ物"
+    },
+    {
+      "id": 45,
+      "text": "タクシー",
+      "category": "乗り物"
+    },
+    {
+      "id": 46,
+      "text": "ピンク",
+      "category": "色"
+    },
+    {
+      "id": 47,
+      "text": "旅行",
+      "category": "趣味"
+    },
+    {
+      "id": 48,
+      "text": "コンビニ",
+      "category": "場所"
+    },
+    {
+      "id": 49,
+      "text": "パンダ",
+      "category": "動物"
+    },
+    {
+      "id": 50,
+      "text": "アイス",
+      "category": "食べ物"
+    }
+  ]
+}

@@ -33,7 +33,8 @@ export default function RoomSetup({ onRoomCreated, onRoomJoined }: RoomSetupProp
       const roomId = await createRoom(roomName.trim());
       onRoomCreated(roomId);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create room');
+      const errorMessage = err instanceof Error ? err.message : 'ルームの作成に失敗しました';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -53,7 +54,8 @@ export default function RoomSetup({ onRoomCreated, onRoomJoined }: RoomSetupProp
       await joinRoom(roomCode.trim());
       onRoomJoined(roomCode.trim());
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to join room');
+      const errorMessage = err instanceof Error ? err.message : 'ルームへの参加に失敗しました';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
